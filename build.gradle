@@ -28,7 +28,7 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-def webappDir = "$projectDir/src/main/webapp"
+def webappDir = "$projectDir/src/main/resources/webapp"
 sourceSets {
     main {
         resources {

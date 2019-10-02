@@ -1,0 +1,19 @@
+<div class="d-flex align-items-stretch justify-content-center background-body">
+	<div class="card mt-5">
+		<div class="card-block p-4 border-radius" style="background-color: aliceblue;border-radius: 2%">
+			<h3 class="card-title color-neutro mb-4 mt-5">Bienvenido, <span class="h5 font-weight-normal">Iniciar
+					Sesión</span></h3>
+			<form>
+				<div class="form-group has-danger">
+					<input type="email" class="form-control form-control-danger form-control-lg"
+						[(ngModel)]="usuario.usuario" name="usuario" placeholder="Nombre de Usuario">
+				</div>
+				<div class="form-group">
+					<input type="password" class="form-control form-control-lg" name="password"
+						[(ngModel)]="usuario.password" placeholder="Contraseña">
+				</div>
+				<a (click)="login(usuario)" class="btn bg-primary btn-block btn-lg mt-3">Ingresar</a>
+			</form>
+		</div>
+	</div>
+</div>

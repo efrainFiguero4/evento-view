@@ -1,0 +1,150 @@
+.form-control.form-control-codigo {
+	background-color: black;
+	border: black;
+	color: white !important;
+	font-size: 24px !important;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.form-control.form-control-codigo-2 {
+	background-color: white;
+	color: black !important;
+	font-size: 24px !important;
+	text-align: center;
+	font-weight: 800;
+	text-transform: uppercase;
+}
+
+.form-control-codigo-2:focus {
+	text-align: center;
+	text-transform: uppercase;
+	color: black;
+	background-color: white;
+	border-color: black;
+	outline: 0;
+	box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25);
+	font-size: 24px;
+}
+
+.terminal {
+	position: relative;
+	width: 80%;
+	max-width: 600px;
+	border-radius: 6px;
+	padding-top: 30px;
+	margin-top: 8px;
+	overflow: hidden;
+	background-color: rgb(15, 15, 16);
+}
+
+.terminal::before {
+	text-align: center;
+	content: "Ingrese codigo";
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: rgb(58, 58, 58);
+	color: red;
+	font-weight: 800;
+	width: 100%;
+	font-size: 19px;
+	line-height: 0;
+	padding: 14px 0;
+	text-indent: 4px;
+}
+
+.terminal pre {
+	font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace !important;
+	color: white !important;
+	padding: 0 1rem 1rem !important;
+	margin: 0 !important;
+}
+
+.terminal .form-control:focus {
+	text-align: center;
+	text-transform: uppercase;
+	color: white;
+	background-color: black;
+	border-color: #ffffff;
+	outline: 0;
+	box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25);
+	font-size: 24px;
+}
+
+svg#rocket {
+	width: 80px !important;
+	position: absolute !important;
+	left: -10px !important;
+	top: -24px !important;
+}
+
+svg#rocket-smoke {
+	height: 100vh !important;
+	position: absolute !important;
+	top: 10px !important;
+	/*right: 180px !important;*/
+	z-index: -10 !important;
+}
+
+svg#clouds {
+	position: fixed !important;
+	bottom: -160px !important;
+	left: -230px !important;
+	z-index: -10 !important;
+	width: 1920px !important;
+}
+
+/* Responsive Styles */
+
+@media screen and (max-width: 767px) {
+	.card-container>*:not(.circle-link), .terminal {
+		width: 100% !important;
+	}
+	.card:not(.highlight-card) {
+		height: 3.5rem !important;
+		background-color: white !important;
+		margin: 8px 0 !important;
+	}
+	.card.highlight-card span {
+		margin-left: 72px !important;
+	}
+	svg#rocket-smoke {
+		right: 120px !important;
+		transform: rotate(-5deg) !important;
+	}
+}
+
+@media screen and (max-width: 575px) {
+	svg#rocket-smoke {
+		display: none !important;
+		visibility: hidden !important;
+	}
+}
+
+#inferior {
+	color: #FFF;
+	background: transparent;
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	height: auto;
+	z-index: 0;
+}
+
+.upload .card {
+	border-radius: 50%;
+	border: solid 1px !important;
+	border-color: #26425f !important;
+	-webkit-box-shadow: -1px 1px 17px 13px rgba(38, 66, 95, 0.62);
+	-moz-box-shadow: -1px 1px 17px 13px rgba(38, 66, 95, 0.62);
+	box-shadow: -1px 1px 17px 13px rgba(38, 66, 95, 0.62);
+}
+
+a.card img {
+	width: 3.5rem;
+	border: 0;
+	padding: 5px;
+	margin: 5px;
+}
