@@ -48,7 +48,7 @@
 					class="btn btn-success btn-lg btn-block bg-primary">Consultar</button>
 			</div>
 		</div>
-		<div class="col-12 col-sm-6 col-md-12" *ngIf="mensaje.codigo == 0 || mensaje.codigo == 1">
+		<div class="col-12 col-sm-6 col-md-12" *ngIf="mensaje.codigo == 0 || mensaje.codigo > 0">
 			<label style="color: transparent"> mensaje</label>
 			<div class="alert" [ngClass]="mensaje.codigo == 0 ? 'alert-danger' : 'alert-success'" role="alert">
 				{{mensaje.valor}}

@@ -3,7 +3,7 @@
 	"version": 1,
 	"newProjectRoot": "projects",
 	"projects": {
-		"evento-web": {
+		"webapp": {
 			"projectType": "application",
 			"schematics": {},
 			"root": "",
@@ -26,7 +26,9 @@
 						"styles": [
 							"src/styles.css"
 						],
-						"scripts": []
+						"scripts": [
+							"./node_modules/jquery/dist/jquery.min.js",
+							"./node_modules/bootstrap/dist/js/bootstrap.js"]
 					},
 					"configurations": {
 						"production": {
@@ -63,18 +65,18 @@
 				"serve": {
 					"builder": "@angular-devkit/build-angular:dev-server",
 					"options": {
-						"browserTarget": "evento-web:build"
+						"browserTarget": "webapp:build"
 					},
 					"configurations": {
 						"production": {
-							"browserTarget": "evento-web:build:production"
+							"browserTarget": "webapp:build:production"
 						}
 					}
 				},
 				"extract-i18n": {
 					"builder": "@angular-devkit/build-angular:extract-i18n",
 					"options": {
-						"browserTarget": "evento-web:build"
+						"browserTarget": "webapp:build"
 					}
 				},
 				"test": {
@@ -91,8 +93,7 @@
 						"styles": [
 							"src/styles.css"
 						],
-						"scripts": [
-						]
+						"scripts": []
 					}
 				},
 				"lint": {
@@ -112,16 +113,16 @@
 					"builder": "@angular-devkit/build-angular:protractor",
 					"options": {
 						"protractorConfig": "e2e/protractor.conf.js",
-						"devServerTarget": "evento-web:serve"
+						"devServerTarget": "webapp:serve"
 					},
 					"configurations": {
 						"production": {
-							"devServerTarget": "evento-web:serve:production"
+							"devServerTarget": "webapp:serve:production"
 						}
 					}
 				}
 			}
 		}
 	},
-	"defaultProject": "evento-web"
+	"defaultProject": "webapp"
 }

@@ -1,5 +1,5 @@
 {
-	"name": "evento-web",
+	"name": "webapp",
 	"version": "0.0.0",
 	"scripts": {
 		"ng": "ng",
@@ -20,6 +20,8 @@
 		"@angular/platform-browser-dynamic": "~8.2.8",
 		"@angular/router": "~8.2.8",
 		"bootstrap": "^4.0.0-alpha.6",
+		"jquery": "^3.4.1",
+		"popper.js": "^1.15.0",
 		"rxjs": "~6.4.0",
 		"tslib": "^1.10.0",
 		"zone.js": "~0.9.1"

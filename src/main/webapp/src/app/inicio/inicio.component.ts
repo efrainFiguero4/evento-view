@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { InicioService } from './inicio.service';
 import { Usuario } from '../login/login';
 import { Item, Busqueda } from './inicio';
+declare var $: any;
 
 @Component({
 	selector: 'inicio-app',
@@ -59,13 +60,13 @@ export class InicioComponent {
 			});
 		})
 	}
-/*
-	confirmar_codigo(codigo: number) {
-		this._inicioservice.confirmar_codigo(codigo).subscribe(resp => {
-			this.mensaje = resp;
-		})
-	}
-*/
+	/*
+		confirmar_codigo(codigo: number) {
+			this._inicioservice.confirmar_codigo(codigo).subscribe(resp => {
+				this.mensaje = resp;
+			})
+		}
+	*/
 	cancelar() {
 		this.mensaje = new Item();
 	}

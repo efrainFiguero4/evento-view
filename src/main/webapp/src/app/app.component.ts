@@ -9,7 +9,7 @@ import { isNullOrUndefined } from 'util';
 })
 
 export class AppComponent {
-	title = 'evento-web';
+	title = 'webapp';
 
 	constructor(private _router: Router) { }
 
