@@ -3,7 +3,7 @@
 		<div class="card-block p-4 border-radius" style="background-color: aliceblue;border-radius: 2%">
 			<h3 class="card-title color-neutro mb-4 mt-5">Bienvenido, <span class="h5 font-weight-normal">Iniciar
 					Sesión</span></h3>
-			<form>
+			<form #formLogin="ngForm" (ngSubmit)="login(formLogin.value)">
 				<div class="form-group has-danger">
 					<input type="email" class="form-control form-control-danger form-control-lg"
 						[(ngModel)]="usuario.usuario" name="usuario" placeholder="Nombre de Usuario">
@@ -12,7 +12,7 @@
 					<input type="password" class="form-control form-control-lg" name="password"
 						[(ngModel)]="usuario.password" placeholder="Contraseña">
 				</div>
-				<a (click)="login(usuario)" class="btn bg-primary btn-block btn-lg mt-3">Ingresar</a>
+				<button type="submit" class="btn bg-primary btn-block btn-lg mt-3">Ingresar</button>
 			</form>
 		</div>
 	</div>
