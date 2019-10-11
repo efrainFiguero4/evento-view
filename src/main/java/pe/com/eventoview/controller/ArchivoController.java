@@ -91,13 +91,11 @@ public class ArchivoController {
                     List<String> funcioness = eventoService.obtenerFunciones().stream().map(Funcion::getNombre).collect(Collectors.toList());
                     funcionesfile.removeIf(funcioness::contains);
                     List<Funcion> funcions = funcionesfile.stream().map(s -> Funcion.builder().usuarioCreacion(1).fechaCreacion(new Date()).usuarioModificacion(1).fechaModificacion(new Date()).estado(Boolean.TRUE).nombre(s).build()).collect(Collectors.toList());
-
                     eventoService.guardarFunciones(funcions);
                 }
                 if (!zonasfile.isEmpty()) {
                     List<String> zonass = eventoService.obtenerZonas().stream().map(Zona::getNombre).collect(Collectors.toList());
                     zonasfile.removeIf(zonass::contains);
-
                     List<Zona> zonas = zonasfile.stream().map(s -> Zona.builder().usuarioCreacion(1).fechaCreacion(new Date()).usuarioModificacion(1).fechaModificacion(new Date()).estado(Boolean.TRUE).nombre(s).build()).collect(Collectors.toList());
                     eventoService.guardarZonas(zonas);
                 }

@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { InicioService } from './inicio.service';
 import { Usuario } from '../login/login';
 import { Item, Busqueda } from './inicio';
+import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from "rxjs/internal/operators";
+
 declare var $: any;
 
 @Component({
@@ -12,9 +15,19 @@ declare var $: any;
 })
 
 export class InicioComponent {
-	title = 'inicio';
+	txtQueryChanged = new Subject<string>();
 
-	constructor(private _inicioservice: InicioService, private _router: Router) { }
+	constructor(private _inicioservice: InicioService) {
+		this.txtQueryChanged
+			.pipe(debounceTime(300), distinctUntilChanged())
+			.subscribe(() => {
+				this.buscar_codigo(this.busqueda);
+			});
+	}
+
+	onFieldChange(event: any) {
+		this.txtQueryChanged.next();
+	}
 
 	usuario = new Usuario();
 	busqueda = new Busqueda();
@@ -53,6 +66,9 @@ export class InicioComponent {
 	buscar_codigo(busqueda: Busqueda) {
 		this._inicioservice.enviar_busqueda(busqueda).subscribe(resp => {
 			this.mensaje = resp;
+			setTimeout(() => {
+				this.busqueda.numero = "";
+			}, 1000);
 		}, error => {
 			error.error.errors.forEach(e => {
 				this.mensaje.codigo = 0;
@@ -60,6 +76,7 @@ export class InicioComponent {
 			});
 		})
 	}
+
 	/*
 		confirmar_codigo(codigo: number) {
 			this._inicioservice.confirmar_codigo(codigo).subscribe(resp => {
@@ -67,6 +84,7 @@ export class InicioComponent {
 			})
 		}
 	*/
+
 	cancelar() {
 		this.mensaje = new Item();
 	}

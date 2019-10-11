@@ -8,60 +8,62 @@
 </header>
 
 <div class="container pt-4" role="main">
-	<div class="row">
-		<div class="col-12 col-12 col-sm-6 col-md-4">
-			<div class="form-group">
-				<label class="text-primary font-weight-bold">Seleccion Evento</label>
-				<select class="form-control form-control-md" [(ngModel)]="busqueda.evento">
-					<option value=""> ::seleccionar ::</option>
-					<option *ngFor="let evento of ls_eventos" [value]="evento.codigo">{{evento.valor}}</option>
-				</select>
+	<form #formBusqueda="ngForm" (ngSubmit)="buscar_codigo(busqueda)">
+		<div class="row">
+			<div class="col-12 col-12 col-sm-6 col-md-4">
+				<div class="form-group">
+					<label class="text-primary font-weight-bold">Seleccion Evento</label>
+					<select class="form-control form-control-md" name="evento" [(ngModel)]="busqueda.evento">
+						<option value=""> ::seleccionar ::</option>
+						<option *ngFor="let evento of ls_eventos" [value]="evento.codigo">{{evento.valor}}</option>
+					</select>
+				</div>
 			</div>
-		</div>
-		<div class="col-12 col-12 col-sm-6 col-md-4">
-			<div class="form-group">
-				<label class="text-primary font-weight-bold">Seleccion Funcion</label>
-				<select class="form-control form-control-md" [(ngModel)]="busqueda.funcion">
-					<option value=""> ::seleccionar ::</option>
-					<option *ngFor="let funcion of ls_funciones" [value]="funcion.codigo">{{funcion.valor}}</option>
-				</select>
+			<div class="col-12 col-12 col-sm-6 col-md-4">
+				<div class="form-group">
+					<label class="text-primary font-weight-bold">Seleccion Funcion</label>
+					<select class="form-control form-control-md" name="funcion" [(ngModel)]="busqueda.funcion">
+						<option value=""> ::seleccionar ::</option>
+						<option *ngFor="let funcion of ls_funciones" [value]="funcion.codigo">{{funcion.valor}}</option>
+					</select>
+				</div>
 			</div>
-		</div>
-		<div class="col-12 col-12 col-sm-6 col-md-4">
-			<div class="form-group">
-				<label class="text-primary font-weight-bold">Seleccion Zona</label>
-				<select class="form-control form-control-md" [(ngModel)]="busqueda.zona">
-					<option value=""> ::seleccionar ::</option>
-					<option *ngFor="let zona of ls_zonas" [value]="zona.codigo">{{zona.valor}}</option>
-				</select>
+			<div class="col-12 col-12 col-sm-6 col-md-4">
+				<div class="form-group">
+					<label class="text-primary font-weight-bold">Seleccion Zona</label>
+					<select class="form-control form-control-md" name="zona" [(ngModel)]="busqueda.zona">
+						<option value=""> ::seleccionar ::</option>
+						<option *ngFor="let zona of ls_zonas" [value]="zona.codigo">{{zona.valor}}</option>
+					</select>
+				</div>
 			</div>
-		</div>
-		<div class="col-12 col-sm-6 col-md-6">
-			<label class="text-primary font-weight-bold">Ingresar codigo</label>
-			<input type="text" name="" id="" [(ngModel)]="busqueda.numero"
-				class="pre form-control form-control-md form-control-codigo-2">
-		</div>
-		<div class="col-12 col-sm-6 col-md-6">
-			<div class="form-group">
-				<label style="color: transparent"> button</label>
-				<button type="button" (click)="buscar_codigo(busqueda)"
-					class="btn btn-success btn-lg btn-block bg-primary">Consultar</button>
+			<div class="col-12 col-sm-6 col-md-6">
+				<label class="text-primary font-weight-bold">Ingresar codigo</label>
+				<input type="text" name="numero" id="" [(ngModel)]="busqueda.numero"
+					(ngModelChange)="onFieldChange($event)"
+					class="pre form-control form-control-md form-control-codigo-2">
 			</div>
-		</div>
-		<div class="col-12 col-sm-6 col-md-12" *ngIf="mensaje.codigo == 0 || mensaje.codigo > 0">
-			<label style="color: transparent"> mensaje</label>
-			<div class="alert" [ngClass]="mensaje.codigo == 0 ? 'alert-danger' : 'alert-success'" role="alert">
-				{{mensaje.valor}}
+			<div class="col-12 col-sm-6 col-md-6">
+				<div class="form-group">
+					<label style="color: transparent"> button</label>
+					<button type="submit" class="btn btn-success btn-lg btn-block bg-primary">Consultar</button>
+				</div>
 			</div>
-		</div>
+			<div class="col-12 col-sm-6 col-md-12" *ngIf="mensaje.codigo == 0 || mensaje.codigo > 0">
+				<label style="color: transparent"> mensaje</label>
+				<div class="alert" [ngClass]="mensaje.codigo == 0 ? 'alert-danger' : 'alert-success'" role="alert">
+					{{mensaje.valor}}
+				</div>
+			</div>
 
-		<svg id="rocket-smoke" alt="Rocket Ship Smoke" xmlns="http://www.w3.org/2000/svg" width="516.119"
-			height="1083.632" viewBox="0 0 516.119 1083.632">
-			<path id="Path_40" data-name="Path 40"
-				d="M644.6,141S143.02,215.537,147.049,870.207s342.774,201.755,342.774,201.755S404.659,847.213,388.815,762.2c-27.116-145.51-11.551-384.124,271.9-609.1C671.15,139.365,644.6,141,644.6,141Z"
-				transform="translate(-147.025 -140.939)" fill="#f5f5f5" />
-		</svg>
-	</div>
+			<svg id="rocket-smoke" alt="Rocket Ship Smoke" xmlns="http://www.w3.org/2000/svg" width="516.119"
+				height="1083.632" viewBox="0 0 516.119 1083.632">
+				<path id="Path_40" data-name="Path 40"
+					d="M644.6,141S143.02,215.537,147.049,870.207s342.774,201.755,342.774,201.755S404.659,847.213,388.815,762.2c-27.116-145.51-11.551-384.124,271.9-609.1C671.15,139.365,644.6,141,644.6,141Z"
+					transform="translate(-147.025 -140.939)" fill="#f5f5f5" />
+			</svg>
+		</div>
+	</form>
 </div>
 
 <svg id="clouds" alt="Gray Clouds Background" xmlns="http://www.w3.org/2000/svg" width="2611.084" height="485.677"
