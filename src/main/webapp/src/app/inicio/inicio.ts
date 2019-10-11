@@ -9,3 +9,10 @@ export class Busqueda {
 	zona: any = '';
 	numero: string = '';
 }
+
+export class CodigoParse {
+	numero: string;
+	idEvento: string;
+	idFuncion: string;
+	idZona: string;
+}

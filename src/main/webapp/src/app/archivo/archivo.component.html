@@ -39,10 +39,10 @@
 					class="btn btn-success btn-block bg-primary">Cargar</button>
 			</div>
 		</div>
-		<div class="col-12 col-sm-6 col-md-12" *ngIf="mensaje.codigo == 0">
-			<label style="color: transparent"> mensaje</label>
-			<div class="alert alert-danger" role="alert">
-				{{mensaje.valor}}
+		<div class="col-12 col-sm-6 col-md-12" *ngIf="mensaje.codigo == 0 || mensaje.codigo > 0">
+			<div class="alert" [ngClass]="mensaje.codigo == 0 ? 'alert-danger' : 'alert-success'" role="alert">
+				{{mensaje.valor}} <br>
+				Codigos No procesados: <div *ngFor="let item of ls_noprocesados">{{item}}</div>
 			</div>
 		</div>
 

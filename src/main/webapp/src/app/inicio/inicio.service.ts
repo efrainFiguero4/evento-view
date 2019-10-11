@@ -4,7 +4,7 @@ import { isNullOrUndefined } from 'util';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { MethodCall } from '@angular/compiler';
-import { Item, Busqueda } from './inicio';
+import { Item, Busqueda, CodigoParse } from './inicio';
 
 @Injectable({ providedIn: 'root' })
 export class InicioService {
@@ -47,6 +47,6 @@ export class InicioService {
 		var form = new FormData();
 		form.append("tipo", tipo);
 		form.append("file", file, file.name);
-		return this._http.post<Item>(environment.urlservices + method, form);
+		return this._http.post<CodigoParse[]>(environment.urlservices + method, form);
 	}
 }
