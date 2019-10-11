@@ -2,6 +2,7 @@ package pe.com.eventoview.controller;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -62,24 +63,22 @@ public class ArchivoController {
                     }
                 });
                 eventoService.insertarCodigos(codigos);
+                return erroneos;
             } else if (tipo.equals(CONFIG)) {
 
                 List<String> eventosfile;
                 List<String> funcionesfile;
                 List<String> zonasfile;
+                List<String[]> datos;
 
                 try (BufferedReader in = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
-                    eventosfile = in.lines().skip(1).map(pattern::split).filter(x -> !x[0].isEmpty()).map(x -> x[0]).collect(Collectors.toList());
+                    datos = in.lines().skip(1).map(pattern::split).collect(Collectors.toList());
                 }
 
-                try (BufferedReader in = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
-                    funcionesfile = in.lines().skip(1).map(pattern::split).filter(x -> !x[1].isEmpty()).map(x -> x[1]).collect(Collectors.toList());
-                }
-
-                try (BufferedReader in = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
-                    zonasfile = in.lines().skip(1).map(pattern::split).filter(x -> !x[2].isEmpty()).map(x -> x[2]).collect(Collectors.toList());
-                }
-
+                datos = datos.stream().filter(x -> x.length > 0).collect(Collectors.toList());
+                eventosfile = datos.stream().filter(x -> !StringUtils.isEmpty(x[0])).map(x -> x[0]).collect(Collectors.toList());
+                funcionesfile = datos.stream().filter(x -> x.length > 1 && !StringUtils.isEmpty(x[1])).map(x -> x[1]).collect(Collectors.toList());
+                zonasfile = datos.stream().filter(x -> x.length > 2 && !StringUtils.isEmpty(x[2])).map(x -> x[2]).collect(Collectors.toList());
 
                 if (!eventosfile.isEmpty()) {
                     List<String> eventoss = eventoService.obtenerEvento().stream().map(Evento::getNombre).collect(Collectors.toList());
@@ -87,6 +86,7 @@ public class ArchivoController {
                     List<Evento> eventos = eventosfile.stream().map(s -> Evento.builder().estado(true).fechaCreacion(new Date()).nombre(s).build()).collect(Collectors.toList());
                     eventoService.guardarEventos(eventos);
                 }
+
                 if (!funcionesfile.isEmpty()) {
                     List<String> funcioness = eventoService.obtenerFunciones().stream().map(Funcion::getNombre).collect(Collectors.toList());
                     funcionesfile.removeIf(funcioness::contains);
@@ -102,7 +102,6 @@ public class ArchivoController {
                     eventoService.guardarZonas(zonas);
                 }
             }
-            return erroneos;
         }
         return Collections.emptyList();
     }
