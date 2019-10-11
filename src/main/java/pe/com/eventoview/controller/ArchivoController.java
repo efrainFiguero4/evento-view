@@ -83,14 +83,14 @@ public class ArchivoController {
                 if (!eventosfile.isEmpty()) {
                     List<String> eventoss = eventoService.obtenerEvento().stream().map(Evento::getNombre).collect(Collectors.toList());
                     eventosfile.removeIf(eventoss::contains);
-                    List<Evento> eventos = eventosfile.stream().map(s -> Evento.builder().estado(true).fechaCreacion(new Date()).nombre(s).build()).collect(Collectors.toList());
+                    List<Evento> eventos = eventosfile.stream().map(s -> Evento.builder().usuarioCreacion(1).fechaCreacion(new Date()).usuarioModificacion(1).fechaModificacion(new Date()).estado(Boolean.TRUE).nombre(s).build()).collect(Collectors.toList());
                     eventoService.guardarEventos(eventos);
                 }
 
                 if (!funcionesfile.isEmpty()) {
                     List<String> funcioness = eventoService.obtenerFunciones().stream().map(Funcion::getNombre).collect(Collectors.toList());
                     funcionesfile.removeIf(funcioness::contains);
-                    List<Funcion> funcions = funcionesfile.stream().map(s -> Funcion.builder().estado(true).fechaCreacion(new Date()).nombre(s).build()).collect(Collectors.toList());
+                    List<Funcion> funcions = funcionesfile.stream().map(s -> Funcion.builder().usuarioCreacion(1).fechaCreacion(new Date()).usuarioModificacion(1).fechaModificacion(new Date()).estado(Boolean.TRUE).nombre(s).build()).collect(Collectors.toList());
 
                     eventoService.guardarFunciones(funcions);
                 }
@@ -98,12 +98,11 @@ public class ArchivoController {
                     List<String> zonass = eventoService.obtenerZonas().stream().map(Zona::getNombre).collect(Collectors.toList());
                     zonasfile.removeIf(zonass::contains);
 
-                    List<Zona> zonas = zonasfile.stream().map(s -> Zona.builder().estado(true).fechaCreacion(new Date()).nombre(s).build()).collect(Collectors.toList());
+                    List<Zona> zonas = zonasfile.stream().map(s -> Zona.builder().usuarioCreacion(1).fechaCreacion(new Date()).usuarioModificacion(1).fechaModificacion(new Date()).estado(Boolean.TRUE).nombre(s).build()).collect(Collectors.toList());
                     eventoService.guardarZonas(zonas);
                 }
             }
         }
         return Collections.emptyList();
     }
-
 }
