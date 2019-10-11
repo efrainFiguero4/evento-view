@@ -48,6 +48,10 @@ public class ArchivoController {
                 namefreq.forEach(data -> {
                     if (eventoService.codigoNoExiste(data.getIdEvento(), data.getIdFuncion(), data.getIdZona(), data.getNumero())) {
                         codigos.add(Codigo.builder()
+                                .fechaCreacion(new Date())
+                                .usuarioCreacion(1)
+                                .fechaModificacion(new Date())
+                                .usuarioModificacion(1)
                                 .numero(data.getNumero())
                                 .idEvento(data.getIdEvento())
                                 .idFuncion(data.getIdFuncion())
