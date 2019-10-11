@@ -70,9 +70,16 @@ public class ArchivoController {
 
                 try (BufferedReader in = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
                     eventosfile = in.lines().skip(1).map(pattern::split).filter(x -> !x[0].isEmpty()).map(x -> x[0]).collect(Collectors.toList());
+                }
+
+                try (BufferedReader in = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
                     funcionesfile = in.lines().skip(1).map(pattern::split).filter(x -> !x[1].isEmpty()).map(x -> x[1]).collect(Collectors.toList());
+                }
+
+                try (BufferedReader in = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
                     zonasfile = in.lines().skip(1).map(pattern::split).filter(x -> !x[2].isEmpty()).map(x -> x[2]).collect(Collectors.toList());
                 }
+
 
                 if (!eventosfile.isEmpty()) {
                     List<String> eventoss = eventoService.obtenerEvento().stream().map(Evento::getNombre).collect(Collectors.toList());
