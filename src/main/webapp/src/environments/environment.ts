@@ -7,7 +7,7 @@ export const environment = {
 	urlservices: ""
 };
 
-/**http://192.168.61.102:8080/evento-view/ */
+/*"http://104.155.155.1/"*/
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

@@ -19,7 +19,7 @@ export class InicioComponent {
 
 	constructor(private _inicioservice: InicioService) {
 		this.txtQueryChanged
-			.pipe(debounceTime(300), distinctUntilChanged())
+			.pipe(debounceTime(300))
 			.subscribe(() => {
 				this.buscar_codigo(this.busqueda);
 			});
@@ -66,12 +66,11 @@ export class InicioComponent {
 	buscar_codigo(busqueda: Busqueda) {
 		this._inicioservice.enviar_busqueda(busqueda).subscribe(resp => {
 			this.mensaje = resp;
-			setTimeout(() => {
-				this.busqueda.numero = "";
-			}, 1000);
+			this.busqueda.numero = "";
 		}, error => {
 			error.error.errors.forEach(e => {
 				this.mensaje.codigo = 0;
+				this.busqueda.numero = "";
 				this.mensaje.valor = e.defaultMessage;
 			});
 		})
