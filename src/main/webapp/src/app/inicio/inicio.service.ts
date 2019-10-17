@@ -32,6 +32,11 @@ export class InicioService {
 		return this._http.get<Item[]>(environment.urlservices + method);
 	}
 
+	get_configuracion() {
+		var method = "concepto/configuracion"
+		return this._http.get<any>(environment.urlservices + method);
+	}
+
 	enviar_busqueda(busqueda: Busqueda) {
 		var method = "concepto/busqueda";
 		return this._http.post<Item>(environment.urlservices + method, busqueda);
@@ -40,6 +45,11 @@ export class InicioService {
 	confirmar_codigo(codigo: number) {
 		var method = "concepto/confirmar?codigo=" + codigo;
 		return this._http.get<Item>(environment.urlservices + method);
+	}
+
+	guardar_configuracion(busqueda: Busqueda) {
+		var method = "concepto/guardarConfiguracion";
+		return this._http.post<any>(environment.urlservices + method, busqueda);
 	}
 
 	subir_archivo(tipo: string, file: File) {

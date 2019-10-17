@@ -1,0 +1,15 @@
+FROM stazdx/openjdk8-alpine-openj9
+
+ENV TIME_ZONE   America/Lima
+ENV TZ=$TIME_ZONE
+
+RUN apk update \
+   && apk add tzdata curl fontconfig libxfont libfontenc \
+   && ttfs=$(apk search -q ttf- | grep -v '\-doc') \
+   && apk add $ttfs \
+   && cp /usr/share/zoneinfo/$TZ /etc/localtime \
+   && echo $TZ > /etc/timezone
+
+COPY build/libs/*-SNAPSHOT.jar /app/microservice.jar
+
+CMD ["/bin/sh", "-c", "java   $JAVA_OPTS -jar /app/microservice.jar"]

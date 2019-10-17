@@ -1,0 +1,41 @@
+version: "3.3"
+services:
+  evento:
+    image: stazdx/evento:latest
+    container_name: evento
+    restart: always
+    networks:
+    - eventonet
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/sistema
+    ports:
+      - "80:8080"
+    depends_on:
+      - mysql
+  mysql:
+    image: "stazdx/mysql:5.7"
+    container_name: "mysql"
+    restart: "always"
+    ports:
+      - "3306:3306"
+    volumes:
+      - "/etc/localtime:/etc/localtime:ro"
+      - "mysql-data:/var/lib/mysql"
+    restart: always
+    networks:
+    - eventonet
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: sistema
+      MYSQL_USER: root
+      MYSQL_PASSWORD: admin
+volumes:
+  mysql-data:
+    driver: "local"
+    driver_opts:
+      type: none
+      o: bind
+      device: /var/pv/mysql-evento
+networks:
+  eventonet:
+    driver: bridge

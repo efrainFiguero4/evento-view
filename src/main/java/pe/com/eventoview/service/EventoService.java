@@ -8,14 +8,19 @@ import pe.com.eventoview.persistence.entity.Codigo;
 import pe.com.eventoview.persistence.entity.Evento;
 import pe.com.eventoview.persistence.entity.Funcion;
 import pe.com.eventoview.persistence.entity.Zona;
+import pe.com.eventoview.persistence.entity.Configuracion;
 import pe.com.eventoview.persistence.repositories.CodigoRepository;
 import pe.com.eventoview.persistence.repositories.EventoRepository;
 import pe.com.eventoview.persistence.repositories.FuncionRepository;
 import pe.com.eventoview.persistence.repositories.ZonaRepository;
+import pe.com.eventoview.persistence.repositories.ConfiguracionRepository;
 import pe.com.eventoview.util.Constantes;
+
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Optional;
 
 @Service
@@ -26,6 +31,7 @@ public class EventoService {
     FuncionRepository funcionRepository;
     ZonaRepository zonaRepository;
     CodigoRepository codigoRepository;
+    ConfiguracionRepository configuracionRepository;
 
     public List<Evento> obtenerEvento() {
         return eventoRepository.findAll();
@@ -37,6 +43,19 @@ public class EventoService {
 
     public List<Zona> obtenerZonas() {
         return zonaRepository.findAll();
+    }
+
+    public Object obtenerConfiguracion() {
+
+        Map event = new HashMap();
+
+        configuracionRepository.findById(1).ifPresent(config -> {
+            event.put("evento", eventoRepository.findById(config.getIdEvento()));
+            event.put("funcion", funcionRepository.findById(config.getIdFuncion()));
+            event.put("zona", zonaRepository.findById(config.getIdZona()));
+        });
+
+        return event;
     }
 
     public Item obtenerBusqueda(BusquedaRequest busqueda) {
@@ -89,6 +108,17 @@ public class EventoService {
         } else {
             return Item.builder().codigo(1).valor("Error al confirmar codigo").build();
         }
+    }
+
+    public void guardarConfiguracion(BusquedaRequest busqueda) {
+        
+        configuracionRepository.findById(1).ifPresent( config -> {
+            config.setIdEvento(busqueda.getEvento()); 
+            config.setIdFuncion(busqueda.getFuncion()); 
+            config.setIdZona(busqueda.getZona()); 
+            configuracionRepository.save(config);
+            });
+
     }
 
     public boolean codigoNoExiste(Integer idEvento, Integer idFuncion, Integer idZona, String numero) {

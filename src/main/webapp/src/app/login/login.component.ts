@@ -18,8 +18,8 @@ export class LoginComponent {
 
 	usuario = new Usuario();
 	ngOnInit() {
-		this.usuario.usuario = "admin";
-		this.usuario.password = "admin";
+		this.usuario.usuario = "";
+		this.usuario.password = "";
 		this._loginservice.estaLogueado();
 	}
 

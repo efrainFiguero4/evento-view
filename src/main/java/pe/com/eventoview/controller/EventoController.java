@@ -43,6 +43,17 @@ public class EventoController {
                 .build()).collect(toList()));
     }
 
+    @GetMapping("/configuracion")
+    public ResponseEntity<Object> obtenerConfiguracion() {
+        return ResponseEntity.ok(eventoService.obtenerConfiguracion());
+    }
+
+    @PostMapping("/guardarConfiguracion")
+    public void guardarConfiguracion(@RequestBody @Valid BusquedaRequest busqueda) {
+
+        eventoService.guardarConfiguracion(busqueda);
+    }
+
     @PostMapping("/busqueda")
     public ResponseEntity<Item> obtenerBusqueda(@RequestBody @Valid BusquedaRequest busqueda) {
         return ResponseEntity.ok(eventoService.obtenerBusqueda(busqueda));

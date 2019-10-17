@@ -8,42 +8,61 @@
 </header>
 
 <div class="container pt-4" role="main">
-	<form #formBusqueda="ngForm" (ngSubmit)="buscar_codigo(busqueda)">
+	<form #formBusqueda="ngForm" (ngSubmit)="usuario.usuario !='admin' ? buscar_codigo(busqueda) : guardar_configuracion(busqueda)">
 		<div class="row">
 			<div class="col-12 col-12 col-sm-6 col-md-4">
-				<div class="form-group">
+				<div class="form-group" *ngIf="usuario.usuario =='admin'">
 					<label class="text-primary font-weight-bold">Seleccion Evento</label>
 					<select class="form-control form-control-md" name="evento" [(ngModel)]="busqueda.evento">
 						<option value=""> ::seleccionar ::</option>
 						<option *ngFor="let evento of ls_eventos" [value]="evento.codigo">{{evento.valor}}</option>
 					</select>
 				</div>
+				<div class="form-group" *ngIf="usuario.usuario !='admin'">
+					<label class="text-primary font-weight-bold">Evento: </label><br>
+					<label>{{configuracion.evento.nombre}}</label>
+				</div>
 			</div>
 			<div class="col-12 col-12 col-sm-6 col-md-4">
-				<div class="form-group">
+				<div class="form-group" *ngIf="usuario.usuario =='admin'">
 					<label class="text-primary font-weight-bold">Seleccion Funcion</label>
 					<select class="form-control form-control-md" name="funcion" [(ngModel)]="busqueda.funcion">
 						<option value=""> ::seleccionar ::</option>
 						<option *ngFor="let funcion of ls_funciones" [value]="funcion.codigo">{{funcion.valor}}</option>
 					</select>
 				</div>
+				<div class="form-group" *ngIf="usuario.usuario !='admin'">
+					<label class="text-primary font-weight-bold">Funcion: </label><br>
+					<label>{{configuracion.funcion.nombre}}</label>
+				</div>
 			</div>
 			<div class="col-12 col-12 col-sm-6 col-md-4">
-				<div class="form-group">
+				<div class="form-group" *ngIf="usuario.usuario =='admin'">
 					<label class="text-primary font-weight-bold">Seleccion Zona</label>
 					<select class="form-control form-control-md" name="zona" [(ngModel)]="busqueda.zona">
 						<option value=""> ::seleccionar ::</option>
 						<option *ngFor="let zona of ls_zonas" [value]="zona.codigo">{{zona.valor}}</option>
 					</select>
 				</div>
+				<div class="form-group" *ngIf="usuario.usuario !='admin'">
+					<label class="text-primary font-weight-bold">Zona: </label><br>
+					<label>{{configuracion.zona.nombre}}</label>
+				</div>
 			</div>
-			<div class="col-12 col-sm-6 col-md-6">
+			<br><br>
+			<div class="col-12 col-sm-6 col-md-6" *ngIf="usuario.usuario !='admin'">
 				<label class="text-primary font-weight-bold">Ingresar codigo</label>
 				<input type="text" name="numero" id="" [(ngModel)]="busqueda.numero"
 					(ngModelChange)="onFieldChange($event)"
-					class="pre form-control form-control-md form-control-codigo-2">
+					class="pre form-control form-control-md form-control-codigo-2" autocomplete="off">
 			</div>
-			<div class="col-12 col-sm-6 col-md-6">
+			<div class="col-12 col-sm-12 col-md-12" *ngIf="usuario.usuario =='admin'">
+				<div class="form-group">
+					<label style="color: transparent"> button</label>
+					<button type="submit" class="btn btn-success btn-lg btn-block bg-primary">Guardar</button>
+				</div>
+			</div>
+			<div class="col-12 col-sm-6 col-md-6" *ngIf="usuario.usuario !='admin'">
 				<div class="form-group">
 					<label style="color: transparent"> button</label>
 					<button type="submit" class="btn btn-success btn-lg btn-block bg-primary">Consultar</button>

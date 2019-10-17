@@ -35,14 +35,21 @@ export class InicioComponent {
 	ngOnInit() {
 		this._inicioservice.estaLogueado();
 		this.usuario = JSON.parse(localStorage.getItem("usuario"));
-		this.obtener_eventos();
-		this.obtener_funciones();
-		this.obtener_zonas();
+
+		this.obtener_configuracion();
+
+		if(this.usuario.usuario == "admin"){
+			this.obtener_eventos();
+			this.obtener_funciones();
+			this.obtener_zonas();
+		}
+
 	}
 
 	ls_funciones: Item[];
 	ls_zonas: Item[];
 	ls_eventos: Item[];
+	configuracion: any;
 	mensaje = new Item();
 
 	obtener_eventos() {
@@ -61,9 +68,21 @@ export class InicioComponent {
 		this._inicioservice.get_zonas().subscribe(resp => {
 			this.ls_zonas = resp;
 		})
+	
+	}
+
+	obtener_configuracion() {
+		this._inicioservice.get_configuracion().subscribe(resp => {
+		this.configuracion = resp;
+
+		this.busqueda.evento = this.configuracion.evento.idEvento;
+		this.busqueda.funcion = this.configuracion.funcion.idFuncion;
+		this.busqueda.zona = this.configuracion.zona.idZona;
+		})
 	}
 
 	buscar_codigo(busqueda: Busqueda) {
+
 		this._inicioservice.enviar_busqueda(busqueda).subscribe(resp => {
 			this.mensaje = resp;
 			this.busqueda.numero = "";
@@ -71,6 +90,22 @@ export class InicioComponent {
 			error.error.errors.forEach(e => {
 				this.mensaje.codigo = 0;
 				this.busqueda.numero = "";
+				this.mensaje.valor = e.defaultMessage;
+			});
+		})
+	}
+
+	guardar_configuracion(busqueda: Busqueda) {
+		busqueda.numero = "0";
+		this._inicioservice.guardar_configuracion(busqueda).subscribe(resp => {
+			this.mensaje.codigo = 1;
+			this.mensaje.valor = "Configuracion guardada";
+		}, error => {
+			error.error.errors.forEach(e => {
+				this.mensaje.codigo = 0;
+				this.busqueda.evento = "";
+				this.busqueda.funcion = "";
+				this.busqueda.evento = "";
 				this.mensaje.valor = e.defaultMessage;
 			});
 		})

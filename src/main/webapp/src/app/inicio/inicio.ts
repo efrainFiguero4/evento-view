@@ -16,3 +16,9 @@ export class CodigoParse {
 	idFuncion: string;
 	idZona: string;
 }
+
+export class Configuracion {
+	evento: any = '';
+	funcion: any = '';
+	zona: any = '';
+}
