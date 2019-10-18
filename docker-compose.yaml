@@ -19,7 +19,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - "/etc/localtime:/etc/localtime:ro"
+      #-"/etc/localtime:/etc/localtime:ro"
       - "mysql-data:/var/lib/mysql"
     restart: always
     networks:
@@ -35,7 +35,7 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /var/pv/mysql-evento
+      device: /C/{DIRECTORIIO_WINDOWS}/evento-view/var/pv/mysql-evento
 networks:
   eventonet:
     driver: bridge
