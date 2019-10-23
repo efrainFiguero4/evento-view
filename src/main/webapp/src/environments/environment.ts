@@ -4,7 +4,7 @@
 
 export const environment = {
 	production: false,
-	urlservices: "http://104.155.155.1/"
+	urlservices: ""
 };
 
 /*"http://104.155.155.1/"*/
