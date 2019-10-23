@@ -1,9 +1,9 @@
-<header class="navbar navbar-expand navbar-dark bg-primary flex-column flex-md-row bd-navbar">
-	<div class="navbar-brand mr-0 mr-md-2 flex-grow-1">
+<header class="navbar navbar-expand navbar-dark bg-primary bd-navbar py-0 my-0">
+	<div class="mr-0 mr-md-2" style="font-size:15px">
 		Bienvenido {{usuario.nombreUsuario}}
 	</div>
-	<div class="font-weight-bold" style="text-decoration: underline; cursor: pointer;">
-		<a class="text-white text-right" (click)="salir()">Salir </a>
+	<div class="font-weight-bold ml-auto" style="text-decoration: underline; cursor: pointer;">
+		<a class="text-white text-right"  style="font-size:15px" (click)="salir()">Salir </a>
 	</div>
 </header>
 
@@ -55,7 +55,7 @@
 				<input type="text" name="numero" id="" [(ngModel)]="busqueda.numero"
 					(ngModelChange)="onFieldChange($event)"
 					class="pre form-control form-control-md form-control-codigo-2" autocomplete="off">
-				<div [ngClass]="mensaje.codigo == 0 ? 'd-block alert-danger' : mensaje.codigo > 0 ? 'd-block alert-success' : ''"  class="font-weight-bold py-1 text-center my-1">
+				<div [ngClass]="mensaje.codigo == 0 ? 'd-block alert-danger' : mensaje.codigo > 0 ? 'd-block alert-success' : ''"  class="font-weight-bold py-1 text-center my-2">
 				   {{mensaje.valor}}
 				 </div>
 			</div>
@@ -64,14 +64,14 @@
 					<button type="submit" class="btn btn-success btn-lg btn-block bg-primary">Guardar</button>
 				</div>
 			</div>
-<!-- 			<div class="col-12 col-sm-6 col-md-12" *ngIf="mensaje.codigo == 0 || mensaje.codigo > 0">
+			<div class="col-12 col-sm-6 col-md-12"  *ngIf="usuario.usuario =='admin' && (mensaje.codigo == 0 || mensaje.codigo > 0)">
 				<div class="alert" [ngClass]="mensaje.codigo == 0 ? 'alert-danger' : 'alert-success'" role="alert">
 					{{mensaje.valor}}
 				</div>
-			</div> -->
-			<div class="col-12 col-sm-6 col-md-6 py-2" *ngIf="usuario.usuario !='admin'">
+			</div>
+			<div class="col-12 col-sm-6 col-md-6" *ngIf="usuario.usuario !='admin'">
 				<div class="form-group">
-					<label style="background-color: transparent"></label>
+					<label class="d-none d-md-block d-lg-block" style="color: transparent">consultar</label>
 					<button type="submit" class="btn btn-success btn-lg btn-block bg-primary">Consultar</button>
 				</div>
 			</div>
